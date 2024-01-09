@@ -1,0 +1,75 @@
+using System;
+using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+
+public class PullInteraction : XRBaseInteractable
+{
+    public static event Action<float> PullActionReleased;
+
+    public Transform start, end;
+    public GameObject notch;
+
+    public float pullAmount { get; private set; } = 0f;
+
+    private LineRenderer _lineRenderer;
+    private IXRSelectInteractor pullingInteractor = null;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    public void SetPullInteractor(SelectEnterEventArgs args)
+    {
+        pullingInteractor = args.interactorObject;
+    }
+
+    public void Release()
+    {
+        PullActionReleased?.Invoke(pullAmount);
+        pullingInteractor = null;
+        pullAmount = 0f;
+        notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, 0f);
+        UpdateString();
+    }
+
+    public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+    {
+        base.ProcessInteractable(updatePhase);
+
+        if(updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic)
+        {
+            if(isSelected)
+            {
+                Vector3 pullPosition = pullingInteractor.transform.position;
+                pullAmount = CalculatePull(pullPosition);
+
+                UpdateString();
+            }
+        }
+    }
+
+    private float CalculatePull(Vector3 pullPosition)
+    {
+        Vector3 pullDirection = pullPosition - start.position;
+        Vector3 targetDirection = end.position - start.position;
+        float maxLength = targetDirection.magnitude;
+        targetDirection.Normalize();
+
+        float pullValue = Vector3.Dot(pullDirection, targetDirection);
+        pullValue = Mathf.Clamp(pullValue, 0f, maxLength);
+
+        return pullValue / maxLength;
+    }
+
+    private void UpdateString()
+    {
+        Vector3[] positions = new Vector3[2];
+        positions[0] = start.position;
+        positions[1] = Vector3.Lerp(start.position, end.position, pullAmount);
+        _lineRenderer.SetPositions(positions);
+
+        notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, pullAmount * 0.1f);
+    }
+}
