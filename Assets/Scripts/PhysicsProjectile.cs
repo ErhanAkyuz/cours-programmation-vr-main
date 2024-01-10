@@ -14,31 +14,34 @@ public class PhysicsProjectile : Projectile
     
     public override void Init(Weapon weapon)
     {
-        Debug.Log("Initializing physics projectile");
         base.Init(weapon);
         Destroy(gameObject, lifeTime);
     }
 
     public override void Launch()
     {
-        Debug.Log("Launching physics projectile");
         base.Launch();
         _rigidbody.AddRelativeForce(Vector3.left * weapon.getShootingForce(), ForceMode.Impulse);
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Weapon") || other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("Player"))
         {
             return;
-        }
-        Debug.Log("Physics projectile collided with " + other.name);
-        Destroy(gameObject);
-        ITakeDamage[] damageTakers = other.GetComponentsInChildren<ITakeDamage>();
-        
-        foreach (var damageTaker in damageTakers)
+        } else if (other.gameObject.CompareTag("Monster"))
         {
-            damageTaker.TakeDamage(weapon, this, transform.position);
+            Debug.Log("Physics projectile collided with ennemy " + other.gameObject.name);
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+            /*
+            ITakeDamage[] damageTakers = other.gameObject.GetComponentsInChildren<ITakeDamage>();
+
+            foreach (var damageTaker in damageTakers)
+            {
+                damageTaker.TakeDamage(weapon, this, transform.position);
+            }
+            */
         }
     }
 }
