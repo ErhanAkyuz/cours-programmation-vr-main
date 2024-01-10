@@ -6,10 +6,12 @@ public class PhysicsProjectile : Projectile
 {
     [SerializeField] private float lifeTime;
     private Rigidbody _rigidbody;
+    private GameManager gameManager;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        gameManager = FindObjectOfType<GameManager>();
     }
     
     public override void Init(Weapon weapon)
@@ -33,6 +35,15 @@ public class PhysicsProjectile : Projectile
         {
             Debug.Log("Physics projectile collided with ennemy " + other.gameObject.name);
             Destroy(gameObject);
+            // Ajouter le score
+            if (gameManager != null)
+            {
+                
+                int currentScore = gameManager.GetScore();
+                Debug.Log("Score actuel : "+ currentScore+", Ajout 10 points");
+                gameManager.SetScore(currentScore + 10); // Ajoute 10 points
+            }
+
             Destroy(other.gameObject);
             /*
             ITakeDamage[] damageTakers = other.gameObject.GetComponentsInChildren<ITakeDamage>();

@@ -9,12 +9,13 @@ public class DifficultySlider : MonoBehaviour
 
     private void Start()
     {
-        difficultySlider.value = PlayerPrefs.GetFloat("Difficulty", 0);
+        difficultySlider.value = PlayerPrefs.GetInt("Difficulty", 0);
     }
 
     public void OnDifficultyChange()
-    {
-        PlayerPrefs.GetFloat("Difficulty", difficultySlider.value);
+    { 
+        int difficulty = (int) difficultySlider.value;
+        PlayerPrefs.GetInt("Difficulty", difficulty);
         Debug.Log("Difficulty changed to " + difficultySlider.value);
     }
 }
