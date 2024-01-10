@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 6038342579815810428}
   m_Layer: 0
   m_Name: Dragon_fly
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

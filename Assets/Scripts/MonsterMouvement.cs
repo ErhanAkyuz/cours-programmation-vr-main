@@ -42,6 +42,6 @@ public class MonsterMouvement : MonoBehaviour
         }
 
         float actualSpeed = agent.velocity.magnitude / agent.speed;
-        animator.SetFloat("Speed", actualSpeed);
+        animator.SetFloat("speed", actualSpeed);
     }
 }
