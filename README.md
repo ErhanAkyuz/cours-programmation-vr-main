@@ -1,4 +1,8 @@
-# Cours Programmation VR
+# Commandes
 
-Projet de base pour suivre le cours de Programmation VR, à destination des étudiants 4A VR de l'ESIEA Laval.
-Ce projet servira aussi de base au TP.
+handTrigger = attaper un objet ou se téléporter sur les bûches de bois 
+indexTrigger = Cliquer sur un bouton ou tirer avec une arme
+
+joystick droit = bouger la Camera
+joystick gauche = bouger le personnage
+joystick gauche + objet attaper = bouger la camera
