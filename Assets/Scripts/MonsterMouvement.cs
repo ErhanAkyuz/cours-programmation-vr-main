@@ -6,13 +6,18 @@ public class MonsterMouvement : MonoBehaviour
 {
     public UnityEngine.AI.NavMeshAgent agent;
     public Animator animator;
-    public Transform target;
+    private Transform target;
 
     public bool hasAttacked;
 
+    void Start()
+    {
+        target = Camera.main.transform;
+    }
+
     void Update()
     {
-        //agent.SetDestination(target.position);
+        agent.SetDestination(target.position);
 
 
         float distance = Vector3.Distance(transform.position, target.position);
