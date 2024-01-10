@@ -32,4 +32,6 @@ public class GameManager : MonoBehaviour
     public void SetScore(int score)
     { this.score = score; }
 
+    public int GetTimer() { return timer; }
+
 }

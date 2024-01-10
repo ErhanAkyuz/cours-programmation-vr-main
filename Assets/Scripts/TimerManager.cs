@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class TimerManager : MonoBehaviour
 
     void Start()
     {
-        countdownTime = gameManager.timer;
+        countdownTime = gameManager.GetTimer();
+        Debug.Log(countdownTime);
         StartTimer();
     }
 
