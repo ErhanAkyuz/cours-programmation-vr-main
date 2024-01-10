@@ -74,7 +74,7 @@ Packages/packages-lock.json
 .vsconfig
 
 # exclude all /[Aa]ssets/LowPoly Guns/ excluding /[Aa]ssets/LowPoly Guns/Textures/
-/[Aa]ssets/LowPoly Guns/*
-!/[Aa]ssets/LowPoly Guns/Material/
-!/[Aa]ssets/LowPoly Guns/Meshes/Pistol*
-!/[Aa]ssets/LowPoly Guns/Prefabs/Pistol*
+#/[Aa]ssets/LowPoly Guns/*
+#!/[Aa]ssets/LowPoly Guns/Material/
+#!/[Aa]ssets/LowPoly Guns/Meshes/Pistol*
+#!/[Aa]ssets/LowPoly Guns/Prefabs/Pistol*
