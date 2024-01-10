@@ -17,7 +17,7 @@ public class MonsterSpawn : MonoBehaviour
     void Start()
     {
         //Récupère la difficulté
-        //int difficulty = PlayerPrefs.GetInt("Difficulty");
+        int difficulty = PlayerPrefs.GetInt("Difficulty");
         //Difficulté
         switch (difficulty)
         {
@@ -53,7 +53,6 @@ public class MonsterSpawn : MonoBehaviour
     {
         yield return new WaitForSeconds(secondesToWait);
         //Faire apparaitre un monstre
-        /*
         foreach (Terrain terrain in terrains)
         {
             TerrainCollider terrainCollider = terrain.GetComponent<TerrainCollider>();
@@ -71,7 +70,7 @@ public class MonsterSpawn : MonoBehaviour
                 Instantiate(monsterPrefab, randomSpawnPoint, Quaternion.identity);
             }
         }
-        */
+        /*
         Terrain terrain = terrains[0];
         TerrainCollider terrainCollider = terrain.GetComponent<TerrainCollider>();
         Bounds terrainBounds = terrainCollider.bounds;
@@ -87,6 +86,7 @@ public class MonsterSpawn : MonoBehaviour
             GameObject monsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Count)];
             Instantiate(monsterPrefab, randomSpawnPoint, Quaternion.identity);
         }
+        */
         if (!isTimerFinish)
         {
             StartCoroutine(SpawnMonster());
