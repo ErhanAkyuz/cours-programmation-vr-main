@@ -46,11 +46,11 @@ public class TimerManager : MonoBehaviour
 
             timerText.text = timerString;
 
-            // Si le temps atteint 0, vous pouvez exécuter une action ici, par exemple :
+            // Si le temps atteint 0
             if (countdownTime <= 0)
             {
-                // Faites quelque chose lorsque le compte à rebours atteint 0
                 Debug.Log("Le compte à rebours est terminé !");
+                SceneManager.LoadScene(0);
             }
         }
     }
